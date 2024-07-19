@@ -1,3 +1,35 @@
+## Modified Beacon consensus (PoS)
+
+```
+/ CalcDifficulty is the difficulty adjustment algorithm. It dynamically adjusts
+// the difficulty to maintain a target block time.
+func (beacon *Beacon) CalcDifficulty(chain consensus.ChainHeaderReader, time uint64, parent *types.Header) *big.Int {
+	// Define the target block time, e.g., 10 seconds
+	const targetBlockTime = 10
+
+	// Transition isn't triggered yet, use the legacy rules for calculation
+	if reached, _ := IsTTDReached(chain, parent.Hash(), parent.Number.Uint64()); !reached {
+		return beacon.ethone.CalcDifficulty(chain, time, parent)
+	}
+
+	// Calculate the time difference from the last block
+	timeDiff := time - parent.Time
+
+	// Adjust difficulty based on the time difference
+	var newDifficulty = new(big.Int).Set(parent.Difficulty)
+	if timeDiff > targetBlockTime {
+		// Decrease difficulty if block time is greater than the target
+		newDifficulty.Div(newDifficulty, big.NewInt(2)) // Simplified adjustment for demonstration
+	} else if timeDiff < targetBlockTime {
+		// Increase difficulty if block time is less than the target
+		newDifficulty.Mul(newDifficulty, big.NewInt(2))
+	}
+
+	return newDifficulty
+}
+```
+
+
 ## Running clients 
 A helper script that builds the submodules, saving the binaries in a known path
 ```bash
