@@ -92,8 +92,6 @@ cast balance -r localhost:8000 0xFe8664457176D0f87EAaBd103ABa410855F81010
 cast send -r localhost:8000 --private-key $PKEY 0x8D512169343cc6e108a8bB6ec5bc116C416eFc8E --value 0.01ether
 ```
 
-Reach out to me on Twitter [@0xZorz](https://twitter.com/0xZorz) if you have any issues. DMs are open
-
 ## Coming Soon
 - Deposits and Withdrawals
 
