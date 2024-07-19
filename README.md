@@ -91,19 +91,3 @@ cast balance -r localhost:8000 0xFe8664457176D0f87EAaBd103ABa410855F81010
 # Send 0.01 ether to 0x8D...8E
 cast send -r localhost:8000 --private-key $PKEY 0x8D512169343cc6e108a8bB6ec5bc116C416eFc8E --value 0.01ether
 ```
-
-## Coming Soon
-- Deposits and Withdrawals
-
-## FAQ / Common Issues
-- ```
-  go: cannot find main module, but found .git/config in /home/gopal/ethereum-pos-testnet
-        to create a module there, run:
-        cd ../.. && go mod init
-  ```
-  This occurs because the submodules were not cloned. Make sure to clone with the `--recursive` flag, i.e. `git clone --recursive https://github.com/rzmahmood/ethereum-pos-testnet.git`
-
-- ```
-  Nil finalized block cannot evict old blobs 
-  ```
-  This is expected log from Geth until a block is 'finalized'. The first finalized block will occur after 24 blocks.
